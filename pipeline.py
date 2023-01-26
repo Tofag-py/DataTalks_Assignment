@@ -1,0 +1,1 @@
+print(f"job finished successfully for day = {day}")

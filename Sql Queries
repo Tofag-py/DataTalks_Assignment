@@ -1,0 +1,15 @@
+SELECT COUNT(*) FROM green_tripdata
+WHERE DATE(lpep_pickup_datetime) = '2019-01-15';
+
+#Number 2
+SELECT DATE(lpep_pickup_datetime) as tripday, MAX(trip_distance) as max_distance
+FROM green_tripdata
+GROUP BY tripday
+ORDER BY max_distance DESC
+LIMIT 1;
+
+#Number 3
+SELECT COUNT(*) FROM green_tripdata
+WHERE DATE(lpep_pickup_datetime) = '2019-01-01' AND (passenger_count = 3 OR passenger_count = 2 );
+
+
