@@ -1,0 +1,30 @@
+#run ubuntu in docker
+#docker run -it ubuntu bash
+#close ubuntu
+#run python in docker
+#docker run -it --entrypoint=bash python 3.9
+#pip list
+#install pandas 
+
+
+docker volume create --name test_postgres_volume -d local test_postgres_volume
+
+docker run -it -e POSTGRES_USER="user" -e POSTGRES_PASSWORD="my_password" -e POSTGRES_DB="assignment" --network=pg_network --name assignment_db -v C:/Users/Dell/Documents/DataTalks.Club/Assignments/DataTalks_Assignment/postgresdata:/var/lib/postgresql/data -p 5433:5432 postgres:13
+
+pgcli -h localhost -p 5433 -u user -d assignment
+
+docker run -it -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" -e PGADMIN_DEFAULT_PASSWORD="my_password" --network=pg_network --name assignment_pgadmin -p 8080:80 dpage/pgadmin4
+
+url1 ="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-01.csv.gz"
+url2 ="https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv"
+python Ingest_data.py --user=user --password=my_password --host=localhost --port=5433 --db=assignment --url1=${url1} --url2=${url2} --first_table_name=green_tripdata --second_table_name=taxi_zone
+
+user = params.user
+    password = params.password
+    host = params.host
+    port = params.port
+    db = params.db
+    url1 = params.url1
+    url2 = params.url2
+    first_table_name = params.first_table_name
+    second_table_nam
